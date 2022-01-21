@@ -1,0 +1,8 @@
+warmup-period = 3s
+repeat = 15
+seed-set = ${repetition}
+sim-time-limit = 1000s
+**.emitter.interarrival_time = ${9ms, 9.5ms, 10ms, 10.5ms, 11ms, 11.5ms, 12ms, 12.5ms, 13ms}
+**.emitter.requested_service_time = ${7ms}
+**.server.vacation_time = ${5}
+**.server.turn_time = ${70ms}

@@ -1,0 +1,102 @@
+#include "Server.h"
+#include "Job_m.h"
+
+Define_Module(Server);
+
+void Server::initialize() {
+
+    deficit = 0.0;
+    constant = par("constant");
+    delay_signal = registerSignal("delay");
+    Q = par("turn_time");
+    vacation_period = par("vacation_time");
+    end_of_vacation = new cMessage("vacation");
+    end_of_service = new cMessage("service");
+    //scheduleAt(simTime(), end_of_vacation);
+}
+
+void Server::handleMessage(cMessage *msg) {
+
+    if (msg->isSelfMessage()) {
+
+        //if the vacation is ended i start a service turn
+        if (strcmp(msg->getName(), "vacation") == 0) {
+            if (queue.size() != 0) {
+                //Check the size of the next job to serve
+                //If it's small enough we serve it, otherwise we start a new vacation
+                //and get the deficit for the next turn.
+                simtime_t job_duration = queue[0].service_time;
+                if (job_duration > Q + deficit) {
+                    deficit = deficit + Q;
+                    startVacation();
+                } else {
+                    deficit = deficit + Q - job_duration;
+                    startService();
+                }
+            } else {
+                //If true, it take the const value, otherwise gets it form exponential
+                deficit = 0.0;
+                EV << "Empty Queue" <<  endl;
+                startVacation();
+            }
+        } else {
+            working = false;
+            //We calculate the response time and remove the job from the queue
+            getResponseTime();
+            //Here the service is done, so we look for other jobs or we go in vacation
+            if (queue.size() != 0) {
+                simtime_t job_duration = queue[0].service_time;
+                if (job_duration > deficit) {
+                    startVacation();
+                } else {
+                    deficit = deficit - job_duration;
+                    startService();
+                }
+            } else {
+                deficit = 0.0;
+                EV << "Empty Queue" << endl;
+                //startVacation();
+            }
+
+        }
+    } else {
+        //At this point the server is on vacation or is serving another job, so
+        //we just add the new job to the queue.
+        Job *job = check_and_cast<Job*>(msg);
+        struct info_holder job_info_holder;
+        job_info_holder.arrival_instant = simTime();
+        job_info_holder.service_time = SimTime::parse(job->getService_time());
+        queue.push_back(job_info_holder);
+        EV << "New entry in queue, queue size: " << queue.size() << endl;
+        if(working==false){
+            working = true;
+            startService();
+        }
+    }
+}
+
+void Server::startService() {
+    working = true;
+    simtime_t job_duration = queue[0].service_time;
+    EV << "Begin Service of: " << job_duration << endl;
+    EV << "New Deficit: " << deficit << endl;
+    scheduleAt(simTime() + job_duration, end_of_service);
+}
+
+void Server::startVacation() {
+    if (!constant) {
+        simtime_t mean_period_time = par("vacation_time");
+        vacation_period = exponential(mean_period_time, 0);
+    }
+
+    EV << "Begin Vacation of: " << vacation_period << endl;
+    EV << "New Deficit: " << deficit << endl;
+    scheduleAt(simTime() + vacation_period, end_of_vacation);
+}
+
+void Server::getResponseTime() {
+    simtime_t now = simTime();
+    simtime_t response_time = now - queue[0].arrival_instant;
+    emit(delay_signal, response_time);
+    queue.erase(queue.begin());
+}

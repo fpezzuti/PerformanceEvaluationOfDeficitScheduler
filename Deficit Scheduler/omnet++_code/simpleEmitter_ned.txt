@@ -1,0 +1,21 @@
+package deficitscheduler.simulations;
+
+import deficitscheduler.Emitter;
+import deficitscheduler.Server;
+import deficitscheduler.Ricevitore;
+
+network simpleEmitter
+{
+    submodules:
+
+        emitter: Emitter {
+            constant = false;
+        }
+        server: Server {
+            constant = false;
+            turn_time = emitter.requested_service_time;
+        }
+    connections:
+        emitter.out --> server.in;
+}
+

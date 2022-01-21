@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
+  <inputs>
+    <inputs name="/DeficitScheduler/simulations/results/General-*.vec"/>
+    <inputs name="/DeficitScheduler/simulations/results/General-*.sca"/>
+  </inputs>
+  <datasets>
+    <datasets name="WinAvg">
+      <items xsi:type="scave:Add" filterPattern="file(/DeficitScheduler/simulations/results/General-10ms,3ms,3ms-#0.vec) AND attr:configname(General) AND attr:runnumber(0) AND module(simpleEmitter.server) AND name(response_time:vector)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(/DeficitScheduler/simulations/results/General-15ms,5ms,3ms-#0.vec) AND attr:configname(General) AND attr:runnumber(30) AND module(simpleEmitter.server) AND name(response_time:vector)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(/DeficitScheduler/simulations/results/General-10ms,3ms,4ms-#0.vec) AND attr:configname(General) AND attr:runnumber(5) AND module(simpleEmitter.server) AND name(response_time:vector)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(/DeficitScheduler/simulations/results/General-15ms,3ms,4ms-#0.vec) AND attr:configname(General) AND attr:runnumber(25) AND module(simpleEmitter.server) AND name(response_time:vector)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(/DeficitScheduler/simulations/results/General-10ms,5ms,4ms-#0.vec) AND attr:configname(General) AND attr:runnumber(15) AND module(simpleEmitter.server) AND name(response_time:vector)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(/DeficitScheduler/simulations/results/General-10ms,5ms,3ms-#0.vec) AND attr:configname(General) AND attr:runnumber(10) AND module(simpleEmitter.server) AND name(response_time:vector)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(/DeficitScheduler/simulations/results/General-15ms,3ms,3ms-#0.vec) AND attr:configname(General) AND attr:runnumber(20) AND module(simpleEmitter.server) AND name(response_time:vector)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(/DeficitScheduler/simulations/results/General-15ms,5ms,4ms-#0.vec) AND attr:configname(General) AND attr:runnumber(35) AND module(simpleEmitter.server) AND name(response_time:vector)" type="VECTOR"/>
+      <items xsi:type="scave:Compute" operation="slidingwinavg">
+        <params name="windowSize" value="250"/>
+      </items>
+      <items xsi:type="scave:LineChart" name="" lineNameFormat="">
+        <properties name="Y.Axis.Title" value="Sliding window average (response time)"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,1ms,1ms-#0.vec General-0-20211217-09:34:41-10872 0 response_time:vector $0=10ms, $1=1ms, $2=1ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,1ms,4ms-#0.vec General-5-20211215-11:52:09-2124 5 response_time:vector $0=10ms, $1=1ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,3ms-#0.vec General-0-20211217-09:42:18-10004 0 response_time:vector $0=10ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,4ms-#0.vec General-5-20211217-09:42:30-6824 5 response_time:vector $0=10ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,3ms-#0.vec General-10-20211217-09:42:37-1096 10 response_time:vector $0=10ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,4ms-#0.vec General-15-20211217-09:42:45-6128 15 response_time:vector $0=10ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,3ms-#0.vec General-20-20211217-09:42:52-21436 20 response_time:vector $0=15ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,4ms-#0.vec General-25-20211217-09:42:59-8028 25 response_time:vector $0=15ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,3ms-#0.vec General-30-20211217-09:43:06-16020 30 response_time:vector $0=15ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,4ms-#0.vec General-35-20211217-09:43:13-4056 35 response_time:vector $0=15ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,3ms-#0.vec General-0-20211217-10:43:27-10364 0 response_time:vector $0=10ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,4ms-#0.vec General-5-20211217-10:43:35-13188 5 response_time:vector $0=10ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,3ms-#0.vec General-10-20211217-10:43:41-11892 10 response_time:vector $0=10ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,4ms-#0.vec General-15-20211217-10:43:51-6628 15 response_time:vector $0=10ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,3ms-#0.vec General-20-20211217-10:43:57-10268 20 response_time:vector $0=15ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,4ms-#0.vec General-25-20211217-10:44:07-15012 25 response_time:vector $0=15ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,3ms-#0.vec General-30-20211217-10:44:15-22332 30 response_time:vector $0=15ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,4ms-#0.vec General-35-20211217-10:44:22-22208 35 response_time:vector $0=15ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,3ms-#0.vec General-0-20211217-11:10:11-6852 0 response_time:vector $0=10ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,4ms-#0.vec General-5-20211217-11:10:29-10596 5 response_time:vector $0=10ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,3ms-#0.vec General-10-20211217-11:10:36-14780 10 response_time:vector $0=10ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,4ms-#0.vec General-15-20211217-11:10:44-22820 15 response_time:vector $0=10ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,3ms-#0.vec General-20-20211217-11:10:52-21668 20 response_time:vector $0=15ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,4ms-#0.vec General-25-20211217-11:10:59-16024 25 response_time:vector $0=15ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,3ms-#0.vec General-30-20211217-11:11:06-13884 30 response_time:vector $0=15ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,4ms-#0.vec General-35-20211217-11:11:13-17192 35 response_time:vector $0=15ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,3ms-#0.vec General-0-20211217-15:05:16-1900 0 response_time:vector $0=10ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,4ms-#0.vec General-5-20211217-15:05:28-13252 5 response_time:vector $0=10ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,3ms-#0.vec General-10-20211217-15:05:34-9112 10 response_time:vector $0=10ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,4ms-#0.vec General-15-20211217-15:05:42-11580 15 response_time:vector $0=10ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,3ms-#0.vec General-20-20211217-15:05:48-12428 20 response_time:vector $0=15ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,4ms-#0.vec General-25-20211217-15:05:54-15868 25 response_time:vector $0=15ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,3ms-#0.vec General-30-20211217-15:06:00-18176 30 response_time:vector $0=15ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,4ms-#0.vec General-35-20211217-15:06:08-6696 35 response_time:vector $0=15ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,3ms-#0.vec General-0-20211217-15:21:46-19044 0 response_time:vector $0=10ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,3ms,4ms-#0.vec General-5-20211217-15:21:53-6888 5 response_time:vector $0=10ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,3ms-#0.vec General-10-20211217-15:21:59-7848 10 response_time:vector $0=10ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-10ms,5ms,4ms-#0.vec General-15-20211217-15:22:09-15172 15 response_time:vector $0=10ms, $1=5ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,3ms-#0.vec General-20-20211217-15:22:16-6136 20 response_time:vector $0=15ms, $1=3ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,3ms,4ms-#0.vec General-25-20211217-15:22:23-13196 25 response_time:vector $0=15ms, $1=3ms, $2=4ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,3ms-#0.vec General-30-20211217-15:22:29-22712 30 response_time:vector $0=15ms, $1=5ms, $2=3ms" value="false"/>
+        <properties name="Line.Display//DeficitScheduler/simulations/results/General-15ms,5ms,4ms-#0.vec General-35-20211217-15:22:36-14964 35 response_time:vector $0=15ms, $1=5ms, $2=4ms" value="false"/>
+      </items>
+    </datasets>
+  </datasets>
+  <chartSheets>
+    <chartSheets name="default" charts="//@datasets/@datasets.0/@items.9"/>
+  </chartSheets>
+</scave:Analysis>
